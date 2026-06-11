@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>A Little Apology</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+
+background:linear-gradient(
+-45deg,
+#030712,
+#1a1038,
+#37125c,
+#5d194f,
+#1b1038,
+#030712
+);
+
+background-size:600% 600%;
+
+animation:galaxy 18s ease infinite;
+
+overflow:hidden;
+
+color:white;
+
+}
+
+@keyframes galaxy{
+
+0%{
+background-position:0% 50%;
+}
+
+50%{
+background-position:100% 50%;
+}
+
+100%{
+background-position:0% 50%;
+}
+
+}
+
+.page{
+
+position:absolute;
+
+width:100%;
+
+height:100vh;
+
+left:0;
+
+top:0;
+
+display:none;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+padding:30px;
+
+overflow-y:auto;
+
+animation:fade .8s;
+
+}
+
+.page.active{
+display:flex;
+}
+
+@keyframes fade{
+
+from{
+opacity:0;
+transform:scale(.96);
+}
+
+to{
+opacity:1;
+transform:scale(1);
+}
+
+}
+
+h1{
+
+font-size:3rem;
+
+margin-bottom:20px;
+
+text-shadow:
+
+0 0 10px #ff8ec8,
+
+0 0 25px #ff5ca8,
+
+0 0 45px #ff2d7a;
+
+}
+
+h2{
+
+font-size:2.2rem;
+
+margin-bottom:20px;
+
+text-shadow:
+
+0 0 10px #ff8ec8,
+
+0 0 20px #ff5ca8;
+
+}
+
+p{
+
+max-width:700px;
+
+margin:10px auto;
+
+padding:10px;
+
+font-size:1.15rem;
+
+line-height:1.8;
+
+color:white;
+
+text-shadow:
+
+0 0 4px rgba(255,255,255,.25);
+
+}
+
+button{
+
+padding:16px 35px;
+
+margin:12px;
+
+font-size:20px;
+
+border:none;
+
+border-radius:50px;
+
+cursor:pointer;
+
+transition:.3s;
+
+font-weight:bold;
+
+}
+
+button:hover{
+
+transform:scale(1.05);
+
+}
+
+#yes,
+#yes2{
+
+background:linear-gradient(
+45deg,
+#ff4f93,
+#ff8cc6
+);
+
+color:white;
+
+box-shadow:
+0 0 20px rgba(255,100,180,.7);
+
+animation:yesGlow 2s infinite alternate;
+
+}
+
+@keyframes yesGlow{
+
+from{
+
+box-shadow:
+0 0 15px hotpink;
+
+}
+
+to{
+
+box-shadow:
+0 0 30px hotpink,
+0 0 50px deeppink;
+
+}
+
+}
+
+#no,
+#no2{
+
+background:linear-gradient(
+45deg,
+#78204c,
+#b0336d
+);
+
+color:white;
+
+position:relative;
+
+}
+
+#loading{
+
+position:fixed;
+
+inset:0;
+
+background:black;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+flex-direction:column;
+
+z-index:99999;
+
+}
+
+.loaderHeart{
+
+font-size:90px;
+
+animation:beat 1s infinite;
+
+}
+
+@keyframes beat{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.3);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+.star,
+.heart,
+.sparkle,
+.balloon{
+
+position:fixed;
+
+pointer-events:none;
+
+}
+
+.star{
+
+animation:
+
+twinkle 2s infinite alternate,
+
+starFloat 10s ease-in-out infinite;
+
+}
+
+@keyframes twinkle{
+
+from{
+opacity:.2;
+}
+
+to{
+opacity:1;
+}
+
+}
+
+@keyframes starFloat{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-10px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+.heart,
+.sparkle,
+.balloon{
+
+bottom:-50px;
+
+animation:floatUp linear forwards;
+
+}
+
+@keyframes floatUp{
+
+to{
+
+transform:translateY(-120vh);
+
+opacity:0;
+
+}
+
+}
+
+#floatingText{
+
+position:fixed;
+
+top:12%;
+
+left:50%;
+
+transform:translateX(-50%);
+
+background:rgba(0,0,0,.8);
+
+padding:16px 30px;
+
+border-radius:40px;
+
+font-size:22px;
+
+opacity:0;
+
+transition:.4s;
+
+z-index:99999;
+
+box-shadow:
+0 0 20px hotpink;
+
+text-align:center;
+
+max-width:90%;
+
+}
+
+.glowText{
+
+animation:glow 2s infinite alternate;
+
+}
+
+@keyframes glow{
+
+from{
+
+text-shadow:
+0 0 10px pink;
+
+}
+
+to{
+
+text-shadow:
+0 0 20px pink,
+0 0 40px hotpink,
+0 0 60px deeppink;
+
+}
+
+}
+
+.finalMessage{
+
+font-size:1.6rem;
+
+line-height:2.2;
+
+}
+
+.musicBtn{
+
+position:fixed;
+
+top:15px;
+
+right:15px;
+
+z-index:1000;
+
+background:linear-gradient(
+45deg,
+#ff4f93,
+#ff8cc6
+);
+
+color:white;
+
+}
+
+::-webkit-scrollbar{
+width:0;
+}
+
+@keyframes noShake{
+
+0%{
+transform:translateX(0px);
+}
+
+25%{
+transform:translateX(-6px);
+}
+
+50%{
+transform:translateX(6px);
+}
+
+75%{
+transform:translateX(-6px);
+}
+
+100%{
+transform:translateX(0px);
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="loading">
+
+<div class="loaderHeart">
+💔
+</div>
+
+<h2 class="glowText">
+Preparing a little apology...
+</h2>
+
+</div>
+
+<button class="musicBtn">
+🎵 Music
+</button>
+
+<div id="floatingText"></div>
+<div class="page active" id="page1">
+
+<h1 class="glowText">
+💔 A Little Apology 💔
+</h1>
+
+<p>
+Sometimes words remain trapped inside the heart.
+</p>
+
+<p>
+Sometimes we realize too late
+that our actions hurt someone
+who never deserved that pain.
+</p>
+
+<p>
+This little journey
+is simply my heart
+trying to say...
+
+"I'm sorry."
+</p>
+
+<button onclick="showPage(2)">
+Open My Heart 💌
+</button>
+
+</div>
+
+<div class="page" id="page2">
+
+<h2>
+💌 First Letter
+</h2>
+
+<p>
+I know I cannot change
+what already happened.
+</p>
+
+<p>
+I know some moments
+leave marks that cannot
+simply disappear.
+</p>
+
+<p>
+But if I could,
+I would go back
+and choose better words,
+better actions,
+and a kinder heart.
+</p>
+
+<button onclick="showPage(3)">
+Continue ❤️
+</button>
+
+</div>
+
+<div class="page" id="page3">
+
+<h2>
+🌙 Second Letter
+</h2>
+
+<p>
+I never wanted
+to become the reason
+behind your sadness.
+</p>
+
+<p>
+If my mistakes
+made your heart heavy,
+then I truly regret them.
+</p>
+
+<p>
+I cannot promise
+that I am perfect,
+but I can promise
+that I understand
+what I did wrong.
+</p>
+
+<button onclick="showPage(4)">
+One Little Question 🌹
+</button>
+
+</div>
+
+<div class="page" id="page4">
+
+<h2>
+🥺 One Little Question
+</h2>
+
+<p>
+Will you let me
+try to make things right?
+</p>
+
+<div>
+
+<button id="yes">
+YES ❤️
+</button>
+
+<button id="no">
+NO 🥺
+</button>
+
+</div>
+
+</div>
+
+<div class="page" id="page5">
+
+<h2 class="glowText">
+✨ Thank You ✨
+</h2>
+
+<p>
+Even listening to me
+means more than you know.
+</p>
+
+<p>
+There is only
+one last thing
+I wish to ask.
+</p>
+
+<p>
+Not to forget.
+
+Not to erase.
+
+Only to allow
+a chance for healing.
+</p>
+
+<button onclick="showPage(6)">
+One Last Promise 🌹
+</button>
+
+</div>
+
+<div class="page" id="page6">
+
+<h2>
+🌹 One Last Promise
+</h2>
+
+<p>
+Will you allow
+this story
+to become kinder
+than it was yesterday?
+</p>
+
+<div>
+
+<button id="yes2">
+YES 🌹
+</button>
+
+<button id="no2">
+NO 🥹
+</button>
+
+</div>
+
+</div>
+
+<div class="page" id="page7">
+
+<h1 class="glowText">
+✨ Thank You ✨
+</h1>
+
+<p>
+Maybe scars stay.
+</p>
+
+<p>
+Maybe memories stay.
+</p>
+
+<p>
+But I hope
+one day
+this sadness
+becomes a gentle memory.
+</p>
+
+<p>
+Thank you
+for hearing
+what my heart
+wanted to say.
+</p>
+
+<p class="finalMessage glowText">
+
+💔 I Am Sorry 💔
+
+<br><br>
+
+🌙 I Will Learn 🌙
+
+<br><br>
+
+🌹 I Will Be Better 🌹
+
+<br><br>
+
+✨ And if someday
+you smile again,
+
+I will quietly
+be grateful. ✨
+
+</p>
+
+</div>
+<script>
+
+setTimeout(function(){
+
+document.getElementById("loading").style.display="none";
+
+},3000);
+
+function showPage(number){
+
+document.querySelectorAll(".page").forEach(function(page){
+
+page.classList.remove("active");
+
+});
+
+document.getElementById("page"+number).classList.add("active");
+
+}
+
+/* ---------- STARS ---------- */
+
+for(let i=0;i<120;i++){
+
+let star=document.createElement("div");
+
+star.className="star";
+
+star.innerHTML=Math.random()>0.5?"✦":"✧";
+
+star.style.left=Math.random()*100+"vw";
+
+star.style.top=Math.random()*100+"vh";
+
+star.style.opacity=Math.random();
+
+star.style.fontSize=(5+Math.random()*18)+"px";
+
+document.body.appendChild(star);
+
+}
+
+/* ---------- FLOATING ITEMS ---------- */
+
+function floating(symbol,className){
+
+let obj=document.createElement("div");
+
+obj.className=className;
+
+obj.innerHTML=symbol;
+
+obj.style.left=Math.random()*100+"vw";
+
+obj.style.fontSize=(18+Math.random()*25)+"px";
+
+obj.style.animationDuration=(4+Math.random()*4)+"s";
+
+document.body.appendChild(obj);
+
+setTimeout(function(){
+
+obj.remove();
+
+},8000);
+
+}
+
+setInterval(function(){
+
+floating("❤️","heart");
+
+},700);
+
+setInterval(function(){
+
+floating("✨","sparkle");
+
+},900);
+
+setInterval(function(){
+
+floating("🎈","balloon");
+
+},1800);
+
+/* ---------- NO BUTTON ---------- */
+
+const noMessages=[
+
+"🥺 Are you sure?",
+
+"💔 Please think again...",
+
+"😔 My heart is still waiting.",
+
+"🌹 One more chance?",
+
+"❤️ Don't leave the story here.",
+
+"🥹 I truly mean my apology.",
+
+"✨ Maybe forgive me a little.",
+
+"💕 The YES button misses you.",
+
+"🌙 I promise to do better.",
+
+"💖 Just one small click..."
+
+];
+
+const yesMessages=[
+
+"YES ❤️",
+
+"YES 💖",
+
+"YES 🌹",
+
+"YES 🥰",
+
+"YES ✨",
+
+"YES 💕",
+
+"YES ❤️ Always"
+
+];
+
+let noCount1=0;
+
+let noCount2=0;
+
+const yes=document.getElementById("yes");
+
+const no=document.getElementById("no");
+
+const yes2=document.getElementById("yes2");
+
+const no2=document.getElementById("no2");
+
+function moveButton(button){
+
+let count=(button.id=="no")?noCount1:noCount2;
+
+let text=document.getElementById("floatingText");
+
+text.innerHTML=noMessages[
+count%noMessages.length
+];
+
+text.style.opacity="1";
+
+clearTimeout(window.msgTimer);
+
+window.msgTimer=setTimeout(function(){
+
+text.style.opacity="0";
+
+},2500);
+
+button.style.position="fixed";
+
+button.style.animation="noShake .2s";
+
+setTimeout(function(){
+
+button.style.animation="";
+
+},200);
+
+button.style.left=
+Math.random()*(window.innerWidth-180)
++"px";
+
+button.style.top=
+(120+Math.random()*(window.innerHeight-220))
++"px";
+
+if(button.id=="no"){
+
+let size=Math.min(
+2,
+1+(noCount1*0.1)
+);
+
+yes.style.transform=
+"scale("+size+")";
+
+yes.innerHTML=
+yesMessages[
+Math.min(
+noCount1,
+yesMessages.length-1
+)
+];
+
+noCount1++;
+
+}
+
+else{
+
+let size=Math.min(
+2,
+1+(noCount2*0.1)
+);
+
+yes2.style.transform=
+"scale("+size+")";
+
+yes2.innerHTML=
+yesMessages[
+Math.min(
+noCount2,
+yesMessages.length-1
+)
+];
+
+noCount2++;
+
+}
+
+}
+
+function noAction(button,e){
+
+if(e){
+
+e.preventDefault();
+
+}
+
+moveButton(button);
+
+}
+
+["mouseover","touchstart","click"].forEach(function(event){
+
+no.addEventListener(event,function(e){
+
+noAction(no,e);
+
+});
+
+});
+
+["mouseover","touchstart","click"].forEach(function(event){
+
+no2.addEventListener(event,function(e){
+
+noAction(no2,e);
+
+});
+
+});
+
+/* ---------- FIRST YES ---------- */
+
+yes.onclick=function(){
+
+noCount2=0;
+
+yes2.style.transform="scale(1)";
+
+yes2.innerHTML="YES 🌹";
+
+yes2.style.position="relative";
+
+yes2.style.left="";
+
+yes2.style.top="";
+
+showPage(5);
+
+};
+
+/* ---------- SECOND YES ---------- */
+
+yes2.onclick=function(){
+
+showPage(7);
+
+for(let i=0;i<250;i++){
+
+setTimeout(function(){
+
+floating("🎆","sparkle");
+
+},i*15);
+
+}
+
+for(let i=0;i<200;i++){
+
+setTimeout(function(){
+
+floating("❤️","heart");
+
+},i*20);
+
+}
+
+for(let i=0;i<120;i++){
+
+setTimeout(function(){
+
+floating("🎈","balloon");
+
+},i*35);
+
+}
+
+for(let i=0;i<180;i++){
+
+setTimeout(function(){
+
+floating("✨","sparkle");
+
+},i*18);
+
+}
+
+};
+
+/* ---------- MUSIC ---------- */
+
+document.querySelector(".musicBtn").onclick=function(){
+
+alert(
+"🎵 You can replace this with your own music later."
+);
+
+};
+
+/* ---------- SHOOTING STAR ---------- */
+
+function shootingStar(){
+
+let s=document.createElement("div");
+
+s.innerHTML="☄️";
+
+s.style.position="fixed";
+
+s.style.left=Math.random()*100+"vw";
+
+s.style.top="-40px";
+
+s.style.fontSize="25px";
+
+s.style.pointerEvents="none";
+
+document.body.appendChild(s);
+
+let x=-300;
+
+let y=900;
+
+let step=0;
+
+let timer=setInterval(function(){
+
+step+=8;
+
+s.style.transform=
+"translate("+
+(step*-1)+"px,"+
+step*3+"px)";
+
+s.style.opacity=
+1-step/300;
+
+if(step>300){
+
+clearInterval(timer);
+
+s.remove();
+
+}
+
+},16);
+
+}
+
+setInterval(shootingStar,5000);
+
+</script>
+
+</body>
+
+</html>
